@@ -1,0 +1,54 @@
+main{
+  max-width: 850px;
+  margin-top: 90px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.View:visited, .View:link{
+  color: rgb(121, 151, 161);
+}
+
+.View-All{
+  margin-bottom: 30px;
+}
+
+.Entregue-Produto{
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.Info-track > p{
+  margin-bottom: 3px;
+}
+
+.Img-Produto{
+  margin-top: 28px;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.Img-Produto > img{
+  width: 100%;
+}
+
+.Foi-Entregue{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 53px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.Progress-Bar{
+  border: 1px solid black;
+  height: 25px;
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 15px;
+  background-color: green;
+}
+

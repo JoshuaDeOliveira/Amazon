@@ -1,0 +1,120 @@
+main{
+  margin-top: 60px;
+}
+
+.Catalogo-Produtos{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+@media screen and (max-width: 1300px) {
+  .Catalogo-Produtos{
+    grid-template-columns: repeat(5, 1fr)
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .Catalogo-Produtos{
+    grid-template-columns: repeat(4, 1fr)
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Catalogo-Produtos{
+    grid-template-columns: repeat(3, 1fr)
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .Catalogo-Produtos{
+    grid-template-columns: repeat(2, 1fr)
+  }
+}
+
+@media screen and (max-width: 450px){
+  .Catalogo-Produtos{
+    grid-template-columns: 1fr;
+  }
+}
+
+.Painel-Produtos{
+  padding: 25px;
+  padding-top: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.199);
+  border-left: none;
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.Imagem-Produto{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 180px;
+  margin-bottom: 20px;
+}
+
+.Imagem-Produto > img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.Configs-Paineis{
+  margin-bottom: 10px;
+}
+
+.Avaliação-Produto > img {
+  height: 20px;
+  padding-right: 6px;
+}
+
+.Nome-Produto{
+  height: 40px;
+  text-overflow: ellipsis;
+}
+
+.two-lines{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.Avaliação-Produto > p {
+  color: blue;
+}
+
+.Avaliação-Produto{
+  display: flex;
+  align-items: center;
+}
+
+.Preço-Produto{
+  font-weight: bolder;
+}
+
+.Quantidades-Produtos{
+  padding: 3px;
+  font-size: 11pt;
+  background-color: #F0F0F0;
+  border-radius: 8px;
+}
+
+.Quantidades-Produtos:focus{
+  outline: 2px solid #FEBD69;
+}
+
+.Adicionado{
+  display: none;
+  color: green;
+}
+
+.Botão-Compra{
+  background-color: #FFD814;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  padding: 8px;
+}
+

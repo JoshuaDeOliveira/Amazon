@@ -1,0 +1,207 @@
+main{
+  max-width: 850px;
+  margin-top: 90px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Your-Orders{
+  font-size: 10pt;
+  color: rgba(26, 26, 26, 0.842);
+  margin-bottom: 22px;
+}
+
+.Orders-Produtos{
+  margin-bottom: 20px;
+}
+
+.Orders-Grid{
+  display: grid;
+  row-gap: 50px;
+}
+
+/*Configurações da Nav do Painel de Ordens*/
+
+nav{
+  border: 1px solid #F0F2F2;
+  border-bottom: none;
+}
+
+.Orders-Produtos > nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 25px;
+  background-color: #F0F2F2;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.Pedidos-Titulos{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.Pedidos-Infos{
+  font-size: 16px;
+}
+
+.left-Order{
+  display: flex;
+  width: auto;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.Pedid{
+  margin-right: 30px;
+}
+
+/*Configurações para os produtos comprados pelo cliente*/
+
+.Produtos-Comprados-Grid{
+  padding: 33px 23px;
+  border: 1px solid #F0F2F2;
+  display: grid;
+  row-gap: 50px;
+}
+
+.Produtos-Comprados{
+  display: grid;
+  grid-template-columns: 150px 1fr 220px;
+}
+
+.ComprarNovamente-Produtos{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 8px;
+  background-color: #F7CA00;
+  border: none;
+  border-radius: 9px;
+  font-size: 15px;
+}
+
+.ComprarNovamente-Produtos > img{
+  margin-right: 15px;
+  width: 24px;
+}
+
+.ComprarNovamente-Produtos > p{
+  margin-left: 5px;
+}
+
+.Titulo{
+  margin-bottom: 5px;
+}
+
+.Entrega{
+  margin-bottom: 3px;
+}
+
+.Quantidade{
+  margin-bottom: 8px;
+}
+
+.Foto-Produtos > img{
+  max-width: 120px;
+  max-height: 140px;
+}
+
+.Botao-Tracking{
+  width: 100%;
+  border: 1px solid rgb(126, 126, 126);
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.Botao-Tracking:hover{
+  background-color:#f7f7f7;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+  main{
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Produtos-Comprados{
+    grid-template-columns: 150px 1fr;
+    row-gap: 0px;
+  }
+
+  .Procurar-Produto{
+    grid-column: 2;
+    max-width: 140px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  /*Configurações da Nav*/
+  .Orders-Produtos > nav{
+    flex-direction: column;
+    align-items: start;
+    padding: 25px 15px;
+  }
+
+  .left-Order{
+    flex-direction: column;
+    line-height: 23px;
+  }
+
+  .Pedid, .right-Order{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .Pedidos-Titulos{
+    flex-shrink: 0;
+  }
+
+  .Pedidos-Info{
+    margin-left: 5px;
+  }
+
+  /*Configurações do Painel*/
+
+  .Produtos-Comprados-Grid{
+    row-gap: 20px;
+  }
+
+  .Botoes-Menores{
+    width: 100%;
+  }
+
+  .Foto-Produtos{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .Titulo{
+    margin-bottom: 8px;
+  }
+
+  .Foto-Produtos > img{
+    max-width: 140px;
+    max-height: 160px;
+  }
+
+  .ComprarNovamente-Produtos{
+    justify-content: center;
+  }
+
+  .Procurar-Produto{
+    max-width: 100%;
+  }
+
+  .Produtos-Comprados{
+    display: flex;
+    flex-direction: column;
+  }
+}
+

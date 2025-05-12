@@ -1,0 +1,250 @@
+/*Header da pagina de Carrinhos*/
+
+header{
+  background-color: white;
+  padding-right: 30px;
+  padding-left: 30px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.Header-Conteudo{
+  display: flex;
+  align-items: center;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.Titulo-Pagina{
+  font-weight: bold;
+}
+
+.Titulo-Pagina > a{
+  text-decoration: none;
+  font-weight: lighter;
+  color: #00718C;
+}
+
+.Left{
+  margin-top: 20px;
+}
+
+.Right{
+  text-align: end;
+}
+
+.Left, .Right{
+  width: 150px;
+}
+
+.Amazon-Logo{
+  max-width: 100px;
+  max-height: 30px;
+}
+
+.Mini-logo{
+  display: none;
+}
+
+.Middle{
+  flex: 1;
+  font-size: 25px;
+  text-align: center;
+}
+
+@media screen and (max-width: 570px) {
+  .Left, .Right{
+    width: auto;
+  }
+
+  .Amazon-Logo{
+    display: none;
+  }
+
+  .Mini-logo{
+    display: inline-block;
+    height: 35px;
+  }
+}
+
+/*Main*/
+
+main{
+  max-width: 1140px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 140px auto 100px;
+}
+
+.Titulo{
+  font-size: 22px;
+  font-weight: bolder;
+  margin-bottom: 20px;
+}
+
+.Pedidos-Produtos{
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  column-gap: 12px;
+  align-items: start;
+}
+
+/*Primeiro Painel*/
+
+.Produtos-Comprados{
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 4px;
+  padding: 18px;
+  margin-bottom: 9px;
+}
+
+.Delivery{
+  color: green;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.Info-Produtos{
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr;
+  column-gap: 20px;
+}
+
+.Img-Produto > img{
+  width: 100px;
+}
+
+.Infos{
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.Preco{
+  color: #B12704;
+}
+
+.Atualizar-js{
+  color: rgb(140, 177, 189);
+  margin-left: 3px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+
+.Atualizar-js:hover{
+  color: #C46B8F;
+}
+
+.Choose{
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.Data-Entrega{
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.Check{
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.Data{
+  cursor: pointer;
+}
+
+.Datas{
+  color: green;
+  font-weight: bold;
+}
+
+.Taxas{
+  color: gray;
+}
+
+/*Segundo Painel*/
+
+.Order-Summary{
+  border: 1px solid rgb(209, 209, 209);
+  padding: 15px;
+}
+
+.Order{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.Order-Items{
+  margin-bottom: 9px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.219);
+}
+
+.Order-Info{
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+
+.Order-Total{
+  display: flex;
+  justify-content: space-between;
+  color: #B1270B;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 9px;
+}
+
+.Button-Payment{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.Button-Payment > button{
+  cursor: pointer;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  background-color: #FFD814;
+  border: none;
+}
+
+@media screen and (max-width: 1000px) {
+  main{
+    max-width: 500px;
+  }
+
+  .Titulo-Pagina{
+    font-size: 20px;
+  }
+
+  .Order-Summary{
+    grid-row: 1;
+    margin-bottom: 12px;
+  }
+
+  .Info-Produtos{
+    grid-template-columns: 100px 1fr;
+    row-gap: 15px;
+  }
+
+  .Delivery-Option{
+    grid-column: span 2;
+  }
+  
+  .Pedidos-Produtos{
+    grid-template-columns: 1fr;
+  }
+}

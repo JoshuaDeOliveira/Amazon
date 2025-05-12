@@ -1,0 +1,169 @@
+header{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: #131921;
+  height: 60px;
+  padding: 0px 15px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Config-Header{
+  display: flex;
+  align-items: center;
+}
+
+.Config-Div:hover{
+  border-radius: 5px;
+  outline: 1px solid white;
+  cursor: pointer;
+}
+
+/*Esquerda*/
+
+.img-logo{
+  margin-top: 5px;
+  width: 100px;
+}
+
+.left > a{
+  padding: 6px;
+}
+
+.left{
+  width: 180px;
+  margin-right: 8px;
+}
+
+.Mini-Logo, .hamburger-menu{
+  display: none;
+}
+
+/*Estilização da parte central da Header*/
+
+.Middle{
+  max-width: 850px;
+  flex: 1;
+}
+
+.Pesquisar{
+  width: 100%;
+  padding: 11px;
+  font-size: 12pt;
+  border-radius: 5px 0px 0px 5px;
+  border: 0px;
+}
+
+.Pesquisar:focus{
+  outline: 2px solid #FEBD69;
+}
+
+.button-Pesquisar{
+  background-color: #FEBD69;
+  border-radius: 0px 5px 5px 0px;
+  padding: 7px 10px;
+  border: 0px;
+}
+
+.button-Pesquisar > img{
+  height: 24px;
+}
+
+/*Estilização da parte direita*/
+
+.Right{
+  color: white;
+  padding: 6px;
+  margin-left: 8px;
+  width: 180px;
+}
+
+.Pedidos{
+  font-size: 11pt;
+}
+
+.Pedidos > a{
+  color: white;
+  text-decoration: none;
+}
+
+.Orders{
+  font-weight: bolder;
+}
+
+.Returns{
+  font-size: 10pt;
+}
+
+.Car, .Pedidos{
+  padding: 6px;
+}
+
+.Car{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  text-decoration: none;
+  color: white;
+}
+
+.Quanto{
+  color: #DB8804;
+  font-weight: bolder;
+  position: absolute;
+  top: 3px;
+  right: 53px;
+}
+
+.Ignore{
+  margin-top: 15px;
+  font-weight: bolder;
+}
+
+.Car > img{
+  width: 50px;
+}
+
+/*Configurações de adaptações*/
+
+@media screen and (max-width: 800px) {
+  .left{
+    width: unset;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .Normal-Logo{
+    display: none;
+  }
+
+  .left{
+    width: unset;
+  }
+
+  .hamburger-menu{
+    display: inline-block;
+  }
+
+  .Mini-Logo{
+    width: 34px;
+    height: 35px;
+    display: inline-block;
+  }
+
+  .Right{
+    width: unset;
+  }
+
+  .New-Menu{
+    display: none;
+  }
+}
+
+
+
