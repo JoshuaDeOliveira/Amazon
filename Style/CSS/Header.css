@@ -117,7 +117,9 @@ header{
   font-weight: bolder;
   position: absolute;
   top: 3px;
-  right: 53px;
+  left: 22px;
+  text-align: center;
+  width: 26px;
 }
 
 .Ignore{
