@@ -1,5 +1,5 @@
 Produtos.forEach(produto => {
-  let HTML = `<div class="Painel-Produtos">
+  let HTML = `<div class="Painel-Produtos" data-produto-id="${produto.id}">
         <div class="Imagem-Produto">
           <img src="./Style/Imagens/Produtos/${produto.img}" alt="">
         </div>
@@ -14,7 +14,7 @@ Produtos.forEach(produto => {
           <p>$${produto.Preco.toFixed(2)}</p>
         </div>
         <div class="Quantidade-Produto Configs-Paineis">
-          <select class="Quantidades-Produtos">
+          <select class="Quantidades-Produtos js-${produto.id}">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -28,7 +28,7 @@ Produtos.forEach(produto => {
           </select>
         </div>
         <div class="Adicionado-Produto Configs-Paineis">
-          <p class="Adicionado">✔ Added</p>
+          <p class="Adicionado css-${produto.id}">✔ Added</p>
         </div>
         <div class="Compra-Produtos">
           <button class="Botão-Compra Botão-Compra-Js" data-produto-id="${produto.id}" >Add to cart</button>
@@ -41,27 +41,43 @@ Produtos.forEach(produto => {
 const Documento = {
   Elemento: {
     BotaoCompra: document.querySelectorAll('.Botão-Compra-Js'),
-    QuantiProdu: document.querySelectorAll('.Quantidades-Produtos')
+    QuantiProdu: document.querySelectorAll('.Quantidades-Produtos'),
+  },
+  Exibição: {
+    ProdutosCarrinho: document.querySelector('.Quanto')
   }
-}
+} /*Objeto que armazena Todas as variaveis utilizadas na Homepage*/ 
 
-Documento.Elemento.BotaoCompra.forEach(button => {
+let Tempo;
+
+Documento.Elemento.BotaoCompra.forEach(button => { /*Este codigo tem um funcionamento simples porem essencial para as features de quantidade de carrinho + funcionamento do botão de compra + Botao Adicionar*/
   button.addEventListener('click', () => {
+    clearTimeout(Tempo)
     let ControlerItem;
     let ID = button.dataset.produtoId
+    let QuantiSeletor = Number(document.querySelector(`.js-${ID}`).value);
+    let AddMSG = document.querySelector(`.css-${ID}`)
+    let CarQuantidade = 0
     car.forEach(item => {
       if (ID === item.id) {
         ControlerItem = item;
       }
     });
     if (ControlerItem) {
-      ControlerItem.Quantidade += 1
+      ControlerItem.Quantidade += QuantiSeletor
     } else {
-      car.push({
-        id: ID,
-        Quantidade: 1
-      })
+      car.push({id: ID, Quantidade: QuantiSeletor})
     }
+    car.forEach(item => {
+      CarQuantidade += item.Quantidade
+    })
     console.log(car)
+
+    AddMSG.style.opacity = 1
+    Tempo = setTimeout(() => {
+      AddMSG.style.opacity = 0
+    }, 2000);
+
+    Documento.Exibição.ProdutosCarrinho.innerHTML = CarQuantidade
   })
 })
