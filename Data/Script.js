@@ -1,4 +1,4 @@
-import {car} from './Info/Car.js';
+import {car, AddCart} from './Info/Car.js';
 import {Produtos} from './Info/Data.js';
 
 Produtos.forEach(produto => {
@@ -49,38 +49,32 @@ const Documento = {
   Exibição: {
     ProdutosCarrinho: document.querySelector('.Quanto')
   }
-} /*Objeto que armazena Todas as variaveis utilizadas na Homepage*/ 
+} /*Objeto que armazena as variaveis utilizadas na Homepage*/ 
 
 let Tempo;
 
-Documento.Elemento.BotaoCompra.forEach(button => { /*Este codigo tem um funcionamento simples porem essencial para as features de quantidade de carrinho + funcionamento do botão de compra + Botao Adicionar*/
+function AddMsg(ID){ //Funcionalidade de mostrar a mensagem ADD
+  clearTimeout(Tempo)
+  let AddMSG = document.querySelector(`.css-${ID}`)
+  AddMSG.style.opacity = 1
+  Tempo = setTimeout(() => {
+    AddMSG.style.opacity = 0
+  }, 2000);
+}
+
+function UpdateCar(){ //Atualiza o Numero de Itens no carrinho
+  let CarQuantidade = 0
+  car.forEach(item => {
+    CarQuantidade += item.Quantidade
+  })
+  Documento.Exibição.ProdutosCarrinho.innerHTML = CarQuantidade
+}
+
+Documento.Elemento.BotaoCompra.forEach(button => {
   button.addEventListener('click', () => {
-    clearTimeout(Tempo)
-    let ControlerItem;
     let ID = button.dataset.produtoId
-    let QuantiSeletor = Number(document.querySelector(`.js-${ID}`).value);
-    let AddMSG = document.querySelector(`.css-${ID}`)
-    let CarQuantidade = 0
-    car.forEach(item => {
-      if (ID === item.id) {
-        ControlerItem = item;
-      }
-    });
-    if (ControlerItem) {
-      ControlerItem.Quantidade += QuantiSeletor
-    } else {
-      car.push({id: ID, Quantidade: QuantiSeletor})
-    }
-    car.forEach(item => {
-      CarQuantidade += item.Quantidade
-    })
-    console.log(car)
-
-    AddMSG.style.opacity = 1
-    Tempo = setTimeout(() => {
-      AddMSG.style.opacity = 0
-    }, 2000);
-
-    Documento.Exibição.ProdutosCarrinho.innerHTML = CarQuantidade
+    AddCart(ID)
+    UpdateCar()
+    AddMsg(ID)
   })
 })
