@@ -1,3 +1,6 @@
+import {car} from './Info/Car.js';
+import {Produtos} from './Info/Data.js';
+
 Produtos.forEach(produto => {
   let HTML = `<div class="Painel-Produtos" data-produto-id="${produto.id}">
         <div class="Imagem-Produto">

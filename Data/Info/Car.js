@@ -1,1 +1,1 @@
-const car = []
+export const car = []
