@@ -1,9 +1,10 @@
-import {car, AddCart} from './Info/Car.js';
+import {AddCart} from './Info/Car.js';
 import {Produtos} from './Info/Data.js';
 import {Fixed} from './Utils/Fixed.js';
+import {UpdateCar} from "./Utils/Mostrar.js";
 
 addEventListener('DOMContentLoaded', () => {
-  UpdateCar()
+  UpdateCar(Documento.Exibição.ProdutosCarrinho)
 })
 
 Produtos.forEach(produto => {
@@ -67,19 +68,11 @@ function AddMsg(ID){ //Funcionalidade de mostrar a mensagem ADD
   }, 2000);
 }
 
-function UpdateCar(){ //Atualiza o Numero de Itens no carrinho
-  let CarQuantidade = 0
-  car.forEach(item => {
-    CarQuantidade += item.Quantidade
-  })
-  Documento.Exibição.ProdutosCarrinho.innerHTML = CarQuantidade
-}
-
 Documento.Elemento.BotaoCompra.forEach(button => {
   button.addEventListener('click', () => {
     let ID = button.dataset.produtoId
     AddCart(ID)
-    UpdateCar()
+    UpdateCar(Documento.Exibição.ProdutosCarrinho)
     AddMsg(ID)
   })
 })

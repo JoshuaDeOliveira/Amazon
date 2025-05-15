@@ -221,6 +221,38 @@ main{
   border: none;
 }
 
+.Info-Preco{
+  display: flex;
+  flex-direction: row;
+}
+
+.Update-Numeros{
+  margin-left: 5px;
+  width: 30px;
+  display: none;
+  font-size: 12pt;
+}
+
+.Update-js{
+  margin-left: 5px;
+}
+
+/*Carrinho Vazio*/
+
+.View-Products{
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffd518;
+}
+
+.View-Products:hover{
+  background-color: #eec615;
+}
+
 @media screen and (max-width: 1000px) {
   main{
     max-width: 500px;
