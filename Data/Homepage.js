@@ -1,5 +1,10 @@
 import {car, AddCart} from './Info/Car.js';
 import {Produtos} from './Info/Data.js';
+import {Fixed} from './Utils/Fixed.js';
+
+addEventListener('DOMContentLoaded', () => {
+  UpdateCar()
+})
 
 Produtos.forEach(produto => {
   let HTML = `<div class="Painel-Produtos" data-produto-id="${produto.id}">
@@ -14,7 +19,7 @@ Produtos.forEach(produto => {
           <p>${produto.Nota}</p>
         </div>
         <div class="Preço-Produto Configs-Paineis">
-          <p>$${produto.Preco.toFixed(2)}</p>
+          <p>$${Fixed(produto.Preco)}</p>
         </div>
         <div class="Quantidade-Produto Configs-Paineis">
           <select class="Quantidades-Produtos js-${produto.id}">

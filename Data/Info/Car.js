@@ -1,4 +1,4 @@
-export const car = []
+export let car = JSON.parse(localStorage.getItem('Car')) || []
 
 export function AddCart(ID){  //Atualiza os itens dentro do carinho
     let ControlerItem;
@@ -13,5 +13,19 @@ export function AddCart(ID){  //Atualiza os itens dentro do carinho
     } else {
       car.push({id: ID, Quantidade: QuantiSeletor})
     }
-    console.log(car)
+    SaveCar()
+}
+
+function SaveCar(){
+  localStorage.setItem('Car', JSON.stringify(car))
+}
+
+export function deleteCart(ID){
+  let carUpdate = []
+  car.forEach(Caritem => {  
+    if (ID !== Caritem.id)
+      carUpdate.push(Caritem)
+  })
+  car = carUpdate
+  SaveCar()
 }
