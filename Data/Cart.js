@@ -26,11 +26,12 @@ car.forEach(itemCar => {
         <div class="Qual-Produto">
           <p class="Infos">${itemProdutos.Nome}</p>
           <p class="Infos Preco">$${Fixed(itemProdutos.Preco)}</p>
-          <div class="Info-Preco">
+          <div class="Info-Preco" data->
             <p class="Quantidade-Itens">Quantity:</p>
-            <span class="Quantos-Produtos">${itemCar.Quantidade}</span>
-            <input type="number" value="${itemCar.Quantidade}" class="Update-Numeros">
-            <span class="Atualizar-js Update-js">Update</span>
+            <span class="Quantos-Produtos Suma-js">${itemCar.Quantidade}</span>
+            <input type="number" value="${itemCar.Quantidade}" class="Update-Numeros Apareca-js">
+            <span class="Update-js Atualizar-js Suma-js" data-test-id="${itemProdutos.id}">Update</span>
+            <span class="Salvar-js Atualizar-js Apareca-js">Salve</span>
             <span class="Atualizar-js Delete-js" data-produto-id="${itemProdutos.id}">Delete</span>
           </div>
         </div>
@@ -81,9 +82,26 @@ let BotaoUpdate = document.querySelectorAll('.Update-js')
 
 BotaoUpdate.forEach(buttonUp => {
   buttonUp.addEventListener('click', () => {
-    console.log
+    TrocarQuantidade()
   })
 })
+
+let BotaoSave = document.querySelectorAll('.Salvar-js')
+
+BotaoSave.forEach(buttonSave => {
+  buttonSave.addEventListener('click', () => {
+    TrocarQuantidade()
+  })
+})
+
+function TrocarQuantidade(){
+  let QuantityDiv = event.target.closest('.Info-Preco') /*Div de Quantidade*/
+  if (QuantityDiv.classList.contains('Qualidade-js')) {
+    QuantityDiv.classList.remove('Qualidade-js')
+  } else {
+    QuantityDiv.classList.add('Qualidade-js')
+  }
+  }
 
 function MensagemVazia(){
   if (car.length === 0) {

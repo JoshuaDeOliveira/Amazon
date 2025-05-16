@@ -226,6 +226,10 @@ main{
   flex-direction: row;
 }
 
+.Salvar-js{
+  display: none;
+}
+
 .Update-Numeros{
   margin-left: 5px;
   width: 30px;
@@ -235,6 +239,16 @@ main{
 
 .Update-js{
   margin-left: 5px;
+}
+
+/*Configurações para aba de qualidade*/
+
+.Qualidade-js > .Suma-js{
+  display: none;
+}
+
+.Qualidade-js > .Apareca-js{
+  display: inline-block;
 }
 
 /*Carrinho Vazio*/
