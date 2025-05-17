@@ -11,12 +11,12 @@ export function AddCart(ID){  //Atualiza os itens dentro do carinho
     if (ControlerItem) {
       ControlerItem.Quantidade += QuantiSeletor
     } else {
-      car.push({id: ID, Quantidade: QuantiSeletor})
+      car.push({id: ID, Quantidade: QuantiSeletor, DeliveryID: '1'})
     }
     SaveCar()
 }
 
-function SaveCar(){
+export function SaveCar(){
   localStorage.setItem('Car', JSON.stringify(car))
 }
 

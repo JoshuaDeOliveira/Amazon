@@ -1,8 +1,9 @@
-import {car, deleteCart} from "./Info/Car.js";
+import {AddCart, car, deleteCart, SaveCar} from "./Info/Car.js";
 import {UpdateCar} from "./Utils/Mostrar.js";
 import {Produtos} from "./Info/Data.js";
 import {Fixed} from "./Utils/Fixed.js";
-
+import {DeliveryOption} from "./Info/Delivery.js";
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js"
 
 let Lista = document.querySelector('.Produtos-Lista')
 let AttItems = document.querySelector('.js-numbers-items')
@@ -13,12 +14,17 @@ addEventListener('DOMContentLoaded', () => {
   MensagemVazia()
 })
 
+let now = dayjs()
+const SevenDay = now.add(7, 'days')
+const ThreeDay = now.add(3, 'days')
+const OneDay = now.add(1, 'days')
+
 car.forEach(itemCar => {
   Produtos.forEach(itemProdutos => {
     if (itemCar.id === itemProdutos.id) {
       HTMLProdutos = `
       <div class="Produtos-Comprados" data-car-id='${itemProdutos.id}'>
-      <p class="Delivery">Delivery date: Monday, May 12</p>
+      <p class="Delivery">Delivery date:<span class='Data-entrega'> Monday, May 12</span></p>
       <div class="Info-Produtos">
         <div class="Img-Produto">
           <img src="./Style/Imagens/Produtos/${itemProdutos.img}" alt="">
@@ -28,42 +34,47 @@ car.forEach(itemCar => {
           <p class="Infos Preco">$${Fixed(itemProdutos.Preco)}</p>
           <div class="Info-Preco" data->
             <p class="Quantidade-Itens">Quantity:</p>
-            <span class="Quantos-Produtos Suma-js">${itemCar.Quantidade}</span>
+            <span class="Quantos-Produtos-js Suma-js">${itemCar.Quantidade}</span>
             <input type="number" value="${itemCar.Quantidade}" class="Update-Numeros Apareca-js">
-            <span class="Update-js Atualizar-js Suma-js" data-test-id="${itemProdutos.id}">Update</span>
-            <span class="Salvar-js Atualizar-js Apareca-js">Salve</span>
+            <span class="Update-js Atualizar-js Suma-js">Update</span>
+            <span class="Salvar-js Atualizar-js Apareca-js" data-update-id="${itemProdutos.id}">Salve</span>
             <span class="Atualizar-js Delete-js" data-produto-id="${itemProdutos.id}">Delete</span>
           </div>
         </div>
         <div class="Delivery-Option">
           <p class="Choose">Choose a delivery option</p>
-          <div class="Data-Entrega">
-            <input class="Check" type="radio" name="option-${itemProdutos.id}" id="Tax">
-            <label for="Tax" class="Data">
-              <p class="Datas">Tuesday, May 20</p>
-              <p class="Taxas">FREE Shipping</p>
-            </label>
-          </div>
-          <div class="Data-Entrega">
-            <input class="Check" type="radio" name="option-${itemProdutos.id}" id="Tax-Barato">
-            <label for="Tax-Barato" class="Data">
-              <p class="Datas">Tuesday, May 20</p>
-              <p class="Taxas">$4.99 - Shipping</p>
-            </label>
-          </div>
-          <div class="Data-Entrega">
-            <input class="Check" type="radio" name="option-${itemProdutos.id}" id="Tax-Caro">
-            <label for="Tax-Caro" class="Data">
-              <p class="Datas">Tuesday, May 20</p>
-              <p class="Taxas">$9.99 - Shipping</p>
-            </label>
-          </div>
+          ${DeliveryHTML(itemCar)}
         </div>
       </div>`
       Lista.innerHTML += HTMLProdutos
     }
   })
 })
+
+function DeliveryHTML(cartItem){
+  let DeliHTML = ''
+  DeliveryOption.forEach(Delivery => {
+    const Today = dayjs()
+    const DeliveryDay = Today.add(
+      Delivery.DeliveryDays,
+      'days'
+    )
+    const dateString = DeliveryDay.format('dddd, MMMM D')
+    const priceString = Delivery.Preco === 0 ? 'FREE' : `$${Delivery.Preco}` 
+    const isChecked = Delivery.id === cartItem.DeliveryID
+
+    DeliHTML += `
+    <div class="Data-Entrega">
+      <input ${isChecked ? 'checked' : ''} class="Check" type="radio" name='Tax-${cartItem.id}' id="Tax-Caro">
+        <div class='Data'>
+          <p class="Datas">${dateString}</p>
+          <p class="Taxas">${priceString} - Shipping</p>
+        </div>
+    </div>`
+
+  })
+  return DeliHTML
+}
 
 let BotaoDelete = document.querySelectorAll('.Delete-js')
 
@@ -90,7 +101,9 @@ let BotaoSave = document.querySelectorAll('.Salvar-js')
 
 BotaoSave.forEach(buttonSave => {
   buttonSave.addEventListener('click', () => {
+    let UpdateID = buttonSave.dataset.updateId
     TrocarQuantidade()
+    SalvarUpdate(event, UpdateID)
   })
 })
 
@@ -101,7 +114,31 @@ function TrocarQuantidade(){
   } else {
     QuantityDiv.classList.add('Qualidade-js')
   }
+}
+
+let Atualizou = document.querySelector('.Quantos-Produtos-js')
+
+function SalvarUpdate(event, ID){
+  let QuantityDiv = event.target.closest('.Info-Preco')
+  let ValorAtualizado = Number(QuantityDiv.querySelector('input').value);
+  let ProdutoCorreto;
+  car.forEach(produto => {
+    if (ID === produto.id){
+      ProdutoCorreto = produto
+    }
+  })
+  if (ValorAtualizado >= 0 && ValorAtualizado <= 1000 ) {
+    if (ProdutoCorreto) {
+      ProdutoCorreto.Quantidade = ValorAtualizado
+    }
+    SaveCar()
+    UpdateCar(AttItems)
+    Atualizou.innerHTML = ValorAtualizado
+  } else {
+    ValorAtualizado = ProdutoCorreto.Quantidade
+    alert('Insira um numero valido')
   }
+}
 
 function MensagemVazia(){
   if (car.length === 0) {

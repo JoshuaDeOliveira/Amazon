@@ -232,12 +232,16 @@ main{
 
 .Update-Numeros{
   margin-left: 5px;
-  width: 30px;
+  width: 40px;
   display: none;
-  font-size: 12pt;
+  font-size: 11pt;
 }
 
 .Update-js{
+  margin-left: 5px;
+}
+
+.Quantos-Produtos-js{
   margin-left: 5px;
 }
 

@@ -7,6 +7,7 @@ addEventListener('DOMContentLoaded', () => {
   UpdateCar(Documento.Exibição.ProdutosCarrinho)
 })
 
+
 Produtos.forEach(produto => {
   let HTML = `<div class="Painel-Produtos" data-produto-id="${produto.id}">
         <div class="Imagem-Produto">
