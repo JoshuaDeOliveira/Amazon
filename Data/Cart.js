@@ -1,4 +1,4 @@
-import {AddCart, car, deleteCart, SaveCar} from "./Info/Car.js";
+import {car, deleteCart, SaveCar} from "./Info/Car.js";
 import {UpdateCar} from "./Utils/Mostrar.js";
 import {Produtos} from "./Info/Data.js";
 import {Fixed} from "./Utils/Fixed.js";
@@ -22,9 +22,22 @@ const OneDay = now.add(1, 'days')
 car.forEach(itemCar => {
   Produtos.forEach(itemProdutos => {
     if (itemCar.id === itemProdutos.id) {
+      let DiaDoPedido = itemCar.DeliveryID
+      let OpçãoDelivery;
+      let dateString;
+      DeliveryOption.forEach(Opcao => {
+        if (Opcao.id === DiaDoPedido) {
+          OpçãoDelivery = Opcao
+        }
+      })
+      const Today = dayjs()
+      const Atual = Today.add(OpçãoDelivery.DeliveryDays, 'Days')
+      const DiaTax = Atual.format('dddd, MMMM D')
+      
+
       HTMLProdutos = `
       <div class="Produtos-Comprados" data-car-id='${itemProdutos.id}'>
-      <p class="Delivery">Delivery date:<span class='Data-entrega'> Monday, May 12</span></p>
+      <p class="Delivery">Delivery date:<span class='Data-entrega'> ${DiaTax}</span></p>
       <div class="Info-Produtos">
         <div class="Img-Produto">
           <img src="./Style/Imagens/Produtos/${itemProdutos.img}" alt="">
@@ -50,6 +63,7 @@ car.forEach(itemCar => {
     }
   })
 })
+
 
 function DeliveryHTML(cartItem){
   let DeliHTML = ''
