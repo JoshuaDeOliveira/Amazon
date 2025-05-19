@@ -29,3 +29,13 @@ export function deleteCart(ID){
   car = carUpdate
   SaveCar()
 }
+
+export function UpdateDeliveryID(IDProduto, OpcaoDelivery){
+  let ProdutoAtual;
+  car.forEach(Produto => {
+    if (IDProduto === Produto.id ) {
+      ProdutoAtual = Produto
+    }
+  })
+  ProdutoAtual.DeliveryID = OpcaoDelivery
+}

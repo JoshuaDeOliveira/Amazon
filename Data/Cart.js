@@ -1,4 +1,4 @@
-import {car, deleteCart, SaveCar} from "./Info/Car.js";
+import {car, deleteCart, SaveCar, UpdateDeliveryID} from "./Info/Car.js";
 import {UpdateCar} from "./Utils/Mostrar.js";
 import {Produtos} from "./Info/Data.js";
 import {Fixed} from "./Utils/Fixed.js";
@@ -24,7 +24,6 @@ car.forEach(itemCar => {
     if (itemCar.id === itemProdutos.id) {
       let DiaDoPedido = itemCar.DeliveryID
       let OpçãoDelivery;
-      let dateString;
       DeliveryOption.forEach(Opcao => {
         if (Opcao.id === DiaDoPedido) {
           OpçãoDelivery = Opcao
@@ -32,7 +31,7 @@ car.forEach(itemCar => {
       })
       const Today = dayjs()
       const Atual = Today.add(OpçãoDelivery.DeliveryDays, 'Days')
-      const DiaTax = Atual.format('dddd, MMMM D')
+      let DiaTax = Atual.format('dddd, MMMM D')
       
 
       HTMLProdutos = `
@@ -78,8 +77,8 @@ function DeliveryHTML(cartItem){
     const isChecked = Delivery.id === cartItem.DeliveryID
 
     DeliHTML += `
-    <div class="Data-Entrega">
-      <input ${isChecked ? 'checked' : ''} class="Check" type="radio" name='Tax-${cartItem.id}' id="Tax-Caro">
+    <div class="Data-Entrega Data-Entrega-js" data-Entrega='${cartItem.id}' data-produto-id='${Delivery.id}'>
+      <input ${isChecked ? 'checked' : ''} class="Check" type="radio" name='Tax-${cartItem.id}' id="Tax">
         <div class='Data'>
           <p class="Datas">${dateString}</p>
           <p class="Taxas">${priceString} - Shipping</p>
@@ -162,3 +161,14 @@ function MensagemVazia(){
   </div>`
   }
 }
+
+let DeliverySelects = document.querySelectorAll('.Data-Entrega-js')
+DeliverySelects.forEach(OpcaoEscolhida => {
+  OpcaoEscolhida.addEventListener('click', () => {
+    let IDProduto = OpcaoEscolhida.dataset.entrega
+    let OpcaoDelivery = OpcaoEscolhida.dataset.produtoId
+    UpdateDeliveryID(IDProduto, OpcaoDelivery)
+    SaveCar()
+  })
+})
+
