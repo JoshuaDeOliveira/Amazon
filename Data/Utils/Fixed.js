@@ -1,3 +1,3 @@
 export function Fixed(Numero){
-  return Numero.toFixed(2)
+  return (Numero / 100).toFixed(2)
 }

@@ -1,26 +1,16 @@
-import {car, deleteCart, SaveCar, UpdateDeliveryID} from "./Info/Car.js";
-import {UpdateCar} from "./Utils/Mostrar.js";
-import {Produtos} from "./Info/Data.js";
-import {Fixed} from "./Utils/Fixed.js";
-import {DeliveryOption} from "./Info/Delivery.js";
+import {car, deleteCart, SaveCar, UpdateDeliveryID} from "../Info/Car.js";
+import {UpdateCar} from "../Utils/Mostrar.js";
+import {Produtos} from "../Info/Data.js";
+import {Fixed} from "../Utils/Fixed.js";
+import {ProcurarOpcao, DeliveryOption} from "../Info/Delivery.js";
+import {RunPayHTML} from "../checkout/Payment.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js"
 
 let Lista = document.querySelector('.Produtos-Lista')
-let AttItems = document.querySelector('.js-numbers-items')
+export let AttItems = document.querySelector('.js-numbers-items')
 let HTMLProdutos;
 
-addEventListener('DOMContentLoaded', () => {
-  UpdateCar(AttItems)
-  RunHTML()
-  MensagemVazia()
-})
-
-let now = dayjs()
-const SevenDay = now.add(7, 'days')
-const ThreeDay = now.add(3, 'days')
-const OneDay = now.add(1, 'days')
-
-function MensagemVazia(){
+export function MensagemVazia(){
   if (car.length === 0) {
     Lista.innerHTML = `<div class="Mensagem-Vazia">
     <p>Your cart is empty</p>
@@ -29,18 +19,13 @@ function MensagemVazia(){
   }
 }
 
-function RunHTML(){
+export function RunHTML(){
 
   car.forEach(itemCar => {
     Produtos.forEach(itemProdutos => {
       if (itemCar.id === itemProdutos.id) {
         let DiaDoPedido = itemCar.DeliveryID
-        let OpçãoDelivery;
-        DeliveryOption.forEach(Opcao => {
-          if (Opcao.id === DiaDoPedido) {
-            OpçãoDelivery = Opcao
-          }
-        })
+        let OpçãoDelivery = ProcurarOpcao(DiaDoPedido)
         const Today = dayjs()
         const Atual = Today.add(OpçãoDelivery.DeliveryDays, 'Days')
         let DiaTax = Atual.format('dddd, MMMM D')
@@ -111,6 +96,7 @@ function RunHTML(){
       Apagar.remove()
       UpdateCar(AttItems)
       MensagemVazia()
+      RunPayHTML()
   })
   })
 
@@ -129,6 +115,7 @@ function RunHTML(){
       let UpdateID = buttonSave.dataset.updateId
       TrocarQuantidade()
       SalvarUpdate(event, UpdateID)
+      RunPayHTML()
     })
   })
 
@@ -141,10 +128,10 @@ function RunHTML(){
     }
   }
 
-  let Atualizou = document.querySelector('.Quantos-Produtos-js')
 
   function SalvarUpdate(event, ID){
     let QuantityDiv = event.target.closest('.Info-Preco')
+    let Atualizou = QuantityDiv.querySelector('.Quantos-Produtos-js')
     let ValorAtualizado = Number(QuantityDiv.querySelector('input').value);
     let ProdutoCorreto;
     car.forEach(produto => {
@@ -152,7 +139,7 @@ function RunHTML(){
         ProdutoCorreto = produto
       }
     })
-    if (ValorAtualizado >= 0 && ValorAtualizado <= 1000 ) {
+    if (ValorAtualizado >= 1 && ValorAtualizado <= 1000 ) {
       if (ProdutoCorreto) {
         ProdutoCorreto.Quantidade = ValorAtualizado
       }
@@ -175,6 +162,7 @@ function RunHTML(){
       SaveCar()
       Lista.innerHTML = '' /*Não deveria estar aqui, mais esta. Lide com isso :D*/
       RunHTML()
+      RunPayHTML()
     })
   })
 }
