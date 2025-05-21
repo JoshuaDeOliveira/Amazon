@@ -70,7 +70,7 @@ export function RunHTML(){
         'days'
       )
       const dateString = DeliveryDay.format('dddd, MMMM D')
-      const priceString = Delivery.Preco === 0 ? 'FREE' : `$${Delivery.Preco}` 
+      const priceString = Delivery.Preco === 0 ? 'FREE' : `$${Fixed(Delivery.Preco)}` 
       const isChecked = Delivery.id === cartItem.DeliveryID
 
       DeliHTML += `
