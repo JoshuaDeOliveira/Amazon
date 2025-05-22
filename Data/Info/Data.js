@@ -11,7 +11,7 @@ export function ProcurarProdutos(ProdutoID){
 }
 
 export const Produtos = [{
-  id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+  id:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
   Nome: 'Intermediate Size Basketball',
   img: 'intermediate-composite-basketball.jpg',
   Avaliacao: 40,

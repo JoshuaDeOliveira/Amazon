@@ -20,6 +20,8 @@ export function MensagemVazia(){
 }
 
 export function RunHTML(){
+   UpdateCar(AttItems) //Mostra o Header da Pagina
+   MensagemVazia() //Caso não tenha itens no interior do carrinho mostra uma mensagem.
 
   car.forEach(itemCar => {
     Produtos.forEach(itemProdutos => {

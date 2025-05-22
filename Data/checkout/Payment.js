@@ -1,7 +1,7 @@
 import {ProcurarOpcao} from "../Info/Delivery.js";
 import {Fixed} from "../Utils/Fixed.js";
 import {ProcurarProdutos} from "../Info/Data.js";
-import {car, AddCart} from "../Info/Car.js";
+import {car} from "../Info/Car.js";
 
 const InserirPayment = document.querySelector('.Order-Summary')
 let html;
