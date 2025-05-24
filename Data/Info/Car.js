@@ -1,9 +1,17 @@
-export let car = JSON.parse(localStorage.getItem('Car')) || []
+import {Fixed} from '../Utils/Fixed.js';
 
-export function AddCart(ID){  //Atualiza os itens dentro do carinho
+class CarData {
+  car;
+  #Key;
+
+  constructor(LocalKey){
+    this.#Key = LocalKey
+    this.Carrinho = JSON.parse(localStorage.getItem(this.#Key)) || [];
+  }
+  AddCart(ID) {  //Atualiza os itens dentro do carinho
     let ControlerItem;
     let QuantiSeletor = Number(document.querySelector(`.js-${ID}`).value);
-    car.forEach(item => {
+    this.Carrinho.forEach(item => {
       if (ID === item.id) {
         ControlerItem = item;
       }
@@ -11,31 +19,33 @@ export function AddCart(ID){  //Atualiza os itens dentro do carinho
     if (ControlerItem) {
       ControlerItem.Quantidade += QuantiSeletor
     } else {
-      car.push({id: ID, Quantidade: QuantiSeletor, DeliveryID: '1'})
+      this.Carrinho.push({id: ID, Quantidade: QuantiSeletor, DeliveryID: '1'})
     }
-    SaveCar()
-}
-
-export function SaveCar(){
-  localStorage.setItem('Car', JSON.stringify(car))
-}
-
-export function deleteCart(ID){
-  let carUpdate = []
-  car.forEach(Caritem => {  
+    this.SaveCar()}
+  SaveCar(){localStorage.setItem(this.#Key, JSON.stringify(this.Carrinho))}
+  deleteCart(ID){ //Deleta os itens dentro do carrinho
+    let carUpdate = []
+    this.Carrinho.forEach(Caritem => {  
     if (ID !== Caritem.id)
       carUpdate.push(Caritem)
-  })
-  car = carUpdate
-  SaveCar()
-}
-
-export function UpdateDeliveryID(IDProduto, OpcaoDelivery){
-  let ProdutoAtual;
-  car.forEach(Produto => {
+    })
+    this.Carrinho = carUpdate
+    this.SaveCar()}
+  UpdateDeliveryID(IDProduto, OpcaoDelivery){
+    let ProdutoAtual;
+    this.Carrinho.forEach(Produto => {
     if (IDProduto === Produto.id ) {
       ProdutoAtual = Produto
     }
-  })
-  ProdutoAtual.DeliveryID = OpcaoDelivery
+    })
+    ProdutoAtual.DeliveryID = OpcaoDelivery
+    this.SaveCar()}
+  CorrigirPreço(Preço){
+    return Fixed(Preço)
+  }
 }
+
+export const Car = new CarData('Car')
+
+
+

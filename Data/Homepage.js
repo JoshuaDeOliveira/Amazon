@@ -1,6 +1,5 @@
-import {AddCart} from './Info/Car.js';
+import {Car} from "./Info/Car.js";
 import {Produtos} from './Info/Data.js';
-import {Fixed} from './Utils/Fixed.js';
 import {UpdateCar} from "./Utils/Mostrar.js";
 
 addEventListener('DOMContentLoaded', () => {
@@ -21,7 +20,7 @@ Produtos.forEach(produto => {
           <p>${produto.Nota}</p>
         </div>
         <div class="Preço-Produto Configs-Paineis">
-          <p>$${Fixed(produto.Preco)}</p>
+          <p>${produto.FormatarPreço()}</p>
         </div>
         <div class="Quantidade-Produto Configs-Paineis">
           <select class="Quantidades-Produtos js-${produto.id}">
@@ -72,7 +71,7 @@ function AddMsg(ID){ //Funcionalidade de mostrar a mensagem ADD
 Documento.Elemento.BotaoCompra.forEach(button => {
   button.addEventListener('click', () => {
     let ID = button.dataset.produtoId
-    AddCart(ID)
+    Car.AddCart(ID)
     UpdateCar(Documento.Exibição.ProdutosCarrinho)
     AddMsg(ID)
   })

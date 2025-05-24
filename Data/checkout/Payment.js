@@ -1,7 +1,6 @@
+import {Car} from "../Info/Car.js";
 import {ProcurarOpcao} from "../Info/Delivery.js";
-import {Fixed} from "../Utils/Fixed.js";
 import {ProcurarProdutos} from "../Info/Data.js";
-import {car} from "../Info/Car.js";
 
 const InserirPayment = document.querySelector('.Order-Summary')
 let html;
@@ -11,8 +10,8 @@ export function RunPayHTML(){
   let ValorTotal = 0
   let FreteProduto = 0
   let QuantidadeTotal = 0
-
-  car.forEach(Produto => {
+  
+  Car.Carrinho.forEach(Produto => {
     const ProdutoSelecionado = ProcurarProdutos(Produto.id)
     const OpcaoSelecionada = ProcurarOpcao(Produto.DeliveryID)
     FreteProduto += OpcaoSelecionada.Preco
@@ -29,26 +28,26 @@ export function RunPayHTML(){
       <div class="Order-Items">
         <div class="Order-Info">
           <p>Items <span class='Total-items'>(${QuantidadeTotal})</span>:</p>
-          <p>$${Fixed(ValorTotal)}</p>
+          <p>$${Car.CorrigirPreço(ValorTotal)}</p>
         </div>
         <div class="Order-Info">
           <p>Shipping & handling:</p>
-          <p>$${Fixed(FreteProduto)}</p>
+          <p>$${Car.CorrigirPreço(FreteProduto)}</p>
         </div>
       </div>
       <div class="Order-Items">
         <div class="Order-Info">
           <p>Total before tax:</p>
-          <p>$${Fixed(ValorPosFrete)}</p>
+          <p>$${Car.CorrigirPreço(ValorPosFrete)}</p>
         </div>
         <div class="Order-Info">
           <p>Estimated tax (10%):</p>
-          <p>$${Fixed(Taxa)}</p>
+          <p>$${Car.CorrigirPreço(Taxa)}</p>
         </div>
       </div>
       <div class="Order-Total">
         <p>Order total:</p>
-        <p>$${Fixed((ValorFinal))}</p>
+        <p>$${Car.CorrigirPreço((ValorFinal))}</p>
       </div>
     </div>
     <div class="Button-Payment">

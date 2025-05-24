@@ -1,3 +1,5 @@
+import {Fixed} from '../Utils/Fixed.js';
+
 export function ProcurarProdutos(ProdutoID){
   let ProdutoSelecionado;
   
@@ -8,6 +10,28 @@ export function ProcurarProdutos(ProdutoID){
   })
 
   return ProdutoSelecionado
+}
+
+class Catalogo{
+  id;
+  Nome;
+  img;
+  Avaliacao;
+  Nota;
+  Preco;
+
+  constructor(DetalhesProduto){
+    this.id = DetalhesProduto.id
+    this.Nome = DetalhesProduto.Nome 
+    this.img = DetalhesProduto.img
+    this.Avaliacao = DetalhesProduto.Avaliacao
+    this.Nota = DetalhesProduto.Nota
+    this.Preco = DetalhesProduto.Preco
+  }
+
+  FormatarPreço(){
+    return `$${Fixed(this.Preco)}`
+  }
 }
 
 export const Produtos = [{
@@ -136,4 +160,6 @@ export const Produtos = [{
   Avaliacao: 40,
   Nota: 215, 
   Preco: 2200
-}]
+}].map(DetalhesProduto => {
+  return new Catalogo(DetalhesProduto)
+})

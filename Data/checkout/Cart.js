@@ -1,7 +1,6 @@
-import {car, deleteCart, SaveCar, UpdateDeliveryID} from "../Info/Car.js";
+import {Car} from "../Info/Car.js";
 import {UpdateCar} from "../Utils/Mostrar.js";
 import {Produtos} from "../Info/Data.js";
-import {Fixed} from "../Utils/Fixed.js";
 import {ProcurarOpcao, DeliveryOption} from "../Info/Delivery.js";
 import {RunPayHTML} from "../checkout/Payment.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js"
@@ -11,7 +10,7 @@ export let AttItems = document.querySelector('.js-numbers-items')
 let HTMLProdutos;
 
 export function MensagemVazia(){
-  if (car.length === 0) {
+  if (Car.Carrinho.length === 0) {
     Lista.innerHTML = `<div class="Mensagem-Vazia">
     <p>Your cart is empty</p>
     <a href="./home.html"><button class="View-Products">View products</button></a>
@@ -23,7 +22,7 @@ export function RunHTML(){
    UpdateCar(AttItems) //Mostra o Header da Pagina
    MensagemVazia() //Caso não tenha itens no interior do carrinho mostra uma mensagem.
 
-  car.forEach(itemCar => {
+  Car.Carrinho.forEach(itemCar => {
     Produtos.forEach(itemProdutos => {
       if (itemCar.id === itemProdutos.id) {
         let DiaDoPedido = itemCar.DeliveryID
@@ -42,7 +41,7 @@ export function RunHTML(){
           </div>
           <div class="Qual-Produto">
             <p class="Infos">${itemProdutos.Nome}</p>
-            <p class="Infos Preco">$${Fixed(itemProdutos.Preco)}</p>
+            <p class="Infos Preco">$${Car.CorrigirPreço(itemProdutos.Preco)}</p>
             <div class="Info-Preco" data->
               <p class="Quantidade-Itens">Quantity:</p>
               <span class="Quantos-Produtos-js Suma-js">${itemCar.Quantidade}</span>
@@ -72,7 +71,7 @@ export function RunHTML(){
         'days'
       )
       const dateString = DeliveryDay.format('dddd, MMMM D')
-      const priceString = Delivery.Preco === 0 ? 'FREE' : `$${Fixed(Delivery.Preco)}` 
+      const priceString = Delivery.Preco === 0 ? 'FREE' : `$${Car.CorrigirPreço(Delivery.Preco)}` 
       const isChecked = Delivery.id === cartItem.DeliveryID
 
       DeliHTML += `
@@ -94,7 +93,7 @@ export function RunHTML(){
     buttonDelete.addEventListener("click", () => {
       let ID = buttonDelete.dataset.produtoId
       let Apagar = document.querySelector(`[data-car-id="${ID}"]`)
-      deleteCart(ID)
+      Car.deleteCart(ID)
       Apagar.remove()
       UpdateCar(AttItems)
       MensagemVazia()
@@ -136,7 +135,7 @@ export function RunHTML(){
     let Atualizou = QuantityDiv.querySelector('.Quantos-Produtos-js')
     let ValorAtualizado = Number(QuantityDiv.querySelector('input').value);
     let ProdutoCorreto;
-    car.forEach(produto => {
+    Car.Carrinho.forEach(produto => {
       if (ID === produto.id){
         ProdutoCorreto = produto
       }
@@ -145,7 +144,7 @@ export function RunHTML(){
       if (ProdutoCorreto) {
         ProdutoCorreto.Quantidade = ValorAtualizado
       }
-      SaveCar()
+      Car.SaveCar()
       UpdateCar(AttItems)
       Atualizou.innerHTML = ValorAtualizado
     } else {
@@ -160,8 +159,8 @@ export function RunHTML(){
     OpcaoEscolhida.addEventListener('click', () => {
       let IDProduto = OpcaoEscolhida.dataset.entrega
       let OpcaoDelivery = OpcaoEscolhida.dataset.produtoId
-      UpdateDeliveryID(IDProduto, OpcaoDelivery)
-      SaveCar()
+      Car.UpdateDeliveryID(IDProduto, OpcaoDelivery)
+      Car.SaveCar()
       Lista.innerHTML = '' /*Não deveria estar aqui, mais esta. Lide com isso :D*/
       RunHTML()
       RunPayHTML()
