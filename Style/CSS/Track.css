@@ -45,10 +45,20 @@ main{
 .Progress-Bar{
   border: 1px solid black;
   height: 25px;
-  width: 100%;
   margin-top: 15px;
-  padding: 12px;
   border-radius: 15px;
+  background-color: transparent;
+}
+
+.Estagio{
+  color: rgb(0, 199, 0);
+}
+
+.Conclusão{
   background-color: green;
+  border-radius: 15px;
+  height: 100%;
+  width: 6%;
+  transition: width 1s;
 }
 

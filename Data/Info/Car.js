@@ -8,9 +8,14 @@ class CarData {
     this.#Key = LocalKey
     this.Carrinho = JSON.parse(localStorage.getItem(this.#Key)) || [];
   }
-  AddCart(ID) {  //Atualiza os itens dentro do carinho
+  AddCart(ID, Quantidade) {  //Atualiza os itens dentro do carinho
     let ControlerItem;
-    let QuantiSeletor = Number(document.querySelector(`.js-${ID}`).value);
+    let QuantiSeletor;
+    if (Quantidade > 1) {
+      QuantiSeletor = Quantidade 
+    } else {
+      QuantiSeletor = 1
+    }
     this.Carrinho.forEach(item => {
       if (ID === item.id) {
         ControlerItem = item;
@@ -23,6 +28,9 @@ class CarData {
     }
     this.SaveCar()}
   SaveCar(){localStorage.setItem(this.#Key, JSON.stringify(this.Carrinho))}
+  RemoveCar(){
+    localStorage.removeItem('Car')
+  }
   deleteCart(ID){ //Deleta os itens dentro do carrinho
     let carUpdate = []
     this.Carrinho.forEach(Caritem => {  

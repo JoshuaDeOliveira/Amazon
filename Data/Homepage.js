@@ -1,9 +1,9 @@
 import {Car} from "./Info/Car.js";
 import {Produtos} from './Info/Data.js';
-import {UpdateCar} from "./Utils/Mostrar.js";
+import {AtualizarHTMLCar} from "./Utils/Mostrar.js";
 
 addEventListener('DOMContentLoaded', () => {
-  UpdateCar(Documento.Exibição.ProdutosCarrinho)
+  AtualizarHTMLCar()
 })
 
 
@@ -51,9 +51,6 @@ const Documento = {
   Elemento: {
     BotaoCompra: document.querySelectorAll('.Botão-Compra-Js'),
     QuantiProdu: document.querySelectorAll('.Quantidades-Produtos'),
-  },
-  Exibição: {
-    ProdutosCarrinho: document.querySelector('.Quanto')
   }
 } /*Objeto que armazena as variaveis utilizadas na Homepage*/ 
 
@@ -71,8 +68,9 @@ function AddMsg(ID){ //Funcionalidade de mostrar a mensagem ADD
 Documento.Elemento.BotaoCompra.forEach(button => {
   button.addEventListener('click', () => {
     let ID = button.dataset.produtoId
-    Car.AddCart(ID)
-    UpdateCar(Documento.Exibição.ProdutosCarrinho)
+    let QuantidadeComprada = Number(document.querySelector(`.js-${ID}`).value);
+    Car.AddCart(ID, QuantidadeComprada)
+    AtualizarHTMLCar()
     AddMsg(ID)
   })
 })

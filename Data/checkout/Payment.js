@@ -1,4 +1,5 @@
 import {Car} from "../Info/Car.js";
+import {Purchased} from "../Info/Pedidos.js"
 import {ProcurarOpcao} from "../Info/Delivery.js";
 import {ProcurarProdutos} from "../Info/Data.js";
 
@@ -47,12 +48,24 @@ export function RunPayHTML(){
       </div>
       <div class="Order-Total">
         <p>Order total:</p>
-        <p>$${Car.CorrigirPreço((ValorFinal))}</p>
+        <p>$${Car.CorrigirPreço(ValorFinal)}</p>
       </div>
     </div>
     <div class="Button-Payment">
-      <button>Place Your Order</button>
+      <button class='Fim-Order'>Place Your Order</button>
     </div>
-  </div>`
+  </div>` //HTML
     InserirPayment.innerHTML = html
+
+    document.querySelector('.Fim-Order').addEventListener('click', () => {
+      if (Car.Carrinho.length === 0) {
+        Purchased.CarrinhoVazio()
+      } else {
+        Purchased.AddOrder(Car.CorrigirPreço(ValorFinal),Car.Carrinho)
+        Purchased.SaveOrder('Cart')
+        console.log(Purchased.Pedidos)
+        Car.RemoveCar()
+        window.location.href = 'Orders.html'
+      }
+    })
 }

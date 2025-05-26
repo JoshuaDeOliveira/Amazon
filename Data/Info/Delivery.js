@@ -7,7 +7,6 @@ export function ProcurarOpcao(ProdutoID){
     }
   })
 
-  console.log(OpcaoSelecionada)
   return OpcaoSelecionada;
 }
 
