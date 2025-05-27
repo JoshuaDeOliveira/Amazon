@@ -12,3 +12,7 @@
 :root{
   --fonteprincipal: Roboto
 }
+
+.Not-found{
+  margin: 10px;
+}

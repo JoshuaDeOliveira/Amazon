@@ -1,13 +1,16 @@
 import {Car} from "./Info/Car.js";
 import {Produtos} from './Info/Data.js';
 import {AtualizarHTMLCar} from "./Utils/Mostrar.js";
+import {SearchHTML} from "./Header.js";
 
 addEventListener('DOMContentLoaded', () => {
   AtualizarHTMLCar()
+  SearchHTML()
 })
 
+let Catalogo = document.querySelector('.Catalogo-Produtos-js')
 
-Produtos.forEach(produto => {
+export function RunHomePageHTML(produto){
   let HTML = `<div class="Painel-Produtos" data-produto-id="${produto.id}">
         <div class="Imagem-Produto">
           <img src="./Style/Imagens/Produtos/${produto.img}" alt="">
@@ -43,9 +46,8 @@ Produtos.forEach(produto => {
           <button class="Botão-Compra Botão-Compra-Js" data-produto-id="${produto.id}" >Add to cart</button>
         </div>
       </div>`
-  let Catalogo = document.querySelector('.Catalogo-Produtos-js')
   Catalogo.innerHTML += HTML
-}); /*Geração de HTML da Homepage central*/
+}
 
 const Documento = {
   Elemento: {

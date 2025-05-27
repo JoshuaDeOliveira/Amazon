@@ -43,7 +43,7 @@ function RunHTML(){
       <img src="./Style/Imagens/Produtos/${ProdutoComprado.img}" alt="">
     </div>
     <div class="Foi-Entregue">
-      <p class='progress-label'>Preparing</p>
+      <p class='progress-label Estagio'>Preparing</p>
       <p class='progress-label'>Shipped</p>
       <p class='progress-label'>Delivered</p>
     </div>
@@ -51,23 +51,24 @@ function RunHTML(){
       <div class='Conclusão'></div>
     </div>`
     Tracker.innerHTML = HTML
+
+    let Comparar = 6
+    const Progress = setInterval(() => {
+      
+      const Bar = document.querySelector('.Conclusão')
+      const Alert = document.querySelectorAll('.progress-label')
+      if (Comparar >= 50 && Comparar < 75) {
+        Alert[0].classList.remove('Estagio')
+        Alert[1].classList.add('Estagio')
+      } else if (Comparar > 75) {
+        Alert[1].classList.remove('Estagio')
+        Alert[2].classList.add('Estagio')
+      }
+      if (Comparar === 100) {
+        clearInterval(Progress)
+      } else {
+        Comparar += 1
+        Bar.style.width = Comparar + '%'
+      }
+    }, 24000);
 }
-
-let Comparar = 6
-
-const Progress = setInterval(() => {
-  const Bar = document.querySelector('.Conclusão')
-  if (Comparar > 0 && Comparar < 50) {
-    console.log("Esta funcionando")
-  } else if (Comparar >= 50 && Comparar < 75) {
-    console.log('Opa, saiu para entrega')
-  } else {
-    console.log('Entregue')
-  }
-  if (Comparar === 100) {
-    clearInterval(Progress)
-  } else {
-    Comparar += 1
-    Bar.style.width = Comparar + '%'
-  }
-}, 240000);

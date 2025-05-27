@@ -59,6 +59,6 @@ main{
   border-radius: 15px;
   height: 100%;
   width: 6%;
-  transition: width 1s;
+  transition: width 0.5s;
 }
 
