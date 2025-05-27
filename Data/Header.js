@@ -21,7 +21,12 @@ export function SearchHTML(){
 
   if (Key !== null) {
     Produtos.forEach(produto => {
-      if (produto.Nome.includes(Key) || produto.keyword.includes(Key)) {
+      const nome = (produto.Nome || '').toLowerCase();
+      const keywords = (produto.keyword || []).map(k => k.toLowerCase());
+
+      const matchNome = nome.includes(Key);
+      const matchKeyword = keywords.some(k => k.includes(Key));
+      if (matchNome || matchKeyword) {
         RunHomePageHTML(produto)
         Achou = true
       }
